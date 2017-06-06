@@ -9,7 +9,7 @@ block content
       div(class='panel panel-default')
         div(class='panel-heading')='Nuevo Pago de Mantenimiento'
           div(clas= 'panel-body')
-            form(action='http://localhost:3000/users/item' method='post' autocomplete='off')
+            form(action='/users/item' method='post' autocomplete='off')
               div(class='form-group')
                 label(for="seguridad")='Seguridad'
                 input(required type='number' name='seguridad' min="0" max="10000" step="1" id='monto' placeholder='Monto $' class='form-control')
@@ -35,4 +35,4 @@ block content
                 th 
                   button(type="submit" class="btn btn-primary")='Registrar'
                 th 
-                  button(type="button" onclick="location.href='http://localhost:3000/users/panel'" name="boton" class="btn btn-primary")="Regresar"
+                  button(type="button" onclick="location.href='users/panel'" name="boton" class="btn btn-primary")="Regresar"

@@ -5,14 +5,14 @@ h1=''
         thead()
             tr
                 th
-                 button(type="button" onclick="location.href='http://localhost:3000/users/balance'" class="btn btn-primary ")='Mostrar Balance'
+                 button(type="button" onclick="location.href='/users/balance'" class="btn btn-primary ")='Mostrar Balance'
                 th
-                 button(type="button" onclick="location.href='http://localhost:3000/users/item'" class="btn btn-primary")='Nuevo Pago'
+                 button(type="button" onclick="location.href='/users/item'" class="btn btn-primary")='Nuevo Pago'
                 th
-                 button(type="button" onclick="location.href='http://localhost:3000/users/shUser'" class="btn btn-primary")='Usuarios'
+                 button(type="button" onclick="location.href='/users/shUser'" class="btn btn-primary")='Usuarios'
                                                                                   
                 th
-                 button(type="button" onclick="location.href='http://localhost:3000/'"  class="btn btn-primary")="Regresar"
+                 button(type="button" onclick="location.href='/'"  class="btn btn-primary")="Regresar"
   
 div(class="col-xs-12 col-md-8")
     h1='Hola... '+ user.nombre  +" eres el admin "        
