@@ -12,9 +12,9 @@ nav(class="navbar navbar-inverse")
       ul(class="nav navbar-nav navbar-right")
         if !isAuthenticated
           li
-            a(href="http://localhost:3000/auth/signup" class="")=' Registrarse'
+            a(href="/auth/signup" class="")=' Registrarse'
           li
-            a(href="http://localhost:3000/auth/signin" class=" ")= '  Iniciar Sesion'
+            a(href="/auth/signin" class=" ")= '  Iniciar Sesion'
         if isAuthenticated
           li(class="dropdown")
             a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -22,9 +22,9 @@ nav(class="navbar navbar-inverse")
               span(class="caret")
             ul(class="dropdown-menu")
               li
-                a(href="http://localhost:3000/users/panel")='Perfil'
+                a(href="/users/panel")='Perfil'
               li
-                a(href="http://localhost:3000/auth/logout")= 'Cerrar Sesion'
+                a(href="/auth/logout")= 'Cerrar Sesion'
  
 
         
