@@ -1,0 +1,30 @@
+extends ../templates/default
+include ../templates/nav
+block content
+    div(class='row')
+        div(class='col-md-10 col-md-offset-0')
+            h1(aling = "center")='Condominos Registrados'
+                table(class="table table-striped")
+                    thead(bgcolor="darkcyan")
+                        tr
+                            th Mes
+                            th Seguridad
+                            th Recolección de Basura
+                            th Limpieza de Áreas Comunes
+                            th Alumbrado de Áreas Comunes
+                            th Limpieza tinacos
+                            th Pago Administrador
+                    tbody(bgcolor="cyan" )
+                        each item, i in items
+                            td= item.mes
+                            td= '$'+item.seguridad
+                            td= '$'+item.limpieza
+                            td= '$'+item.luz
+                            td= '$'+item.tinacos
+                            td= '$'+item.pago
+                            td= '$'+item.mes
+                             tr
+               
+           
+                        
+            button(type="button" onclick="location.href='http://localhost:3000/users/panel'" name="boton" class="btn btn-primary")="Regresar"

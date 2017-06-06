@@ -1,0 +1,25 @@
+extends ../templates/default
+include ../templates/nav
+block content
+    div(class="col-md-4 col-md-offset-4")
+        h2='Lista de Usuarios Registrados'
+        table(class="table table-striped"
+            aling = 'center')
+            thead(bgcolor="darkcyan")
+                tr
+                    th # Depto
+                    th Nombre
+                    th Email
+            tbody(bgcolor="cyan" )
+                each item, i in items
+                    tr
+                        td= item._id
+                        td= item.nombre
+                        td= item.email
+            div(class="col-md-4 col-md-offset-4")
+                table(class="table table-striped"
+                        aling = 'center')
+                    thead()
+                        tr
+                            th
+                                button(type="button" onclick="location.href='http://localhost:3000/'"  class="btn btn-primary")="Regresar"
