@@ -1,5 +1,14 @@
 extends templates/default
 block content
+  if !isAuthenticated
+    div(class="col-md-12 col-md-offset-0")
+        div(class="jumbotron") 
+              div(class="container")
+              h1 Sistema de Administración Condominal 
+              p Pago a Tiempo Servicion Completo
+              tempor 
+              p
+              p(class="btn btn-primary btn-lg" role="button")="Leer más"
 
   h1= 'Pagina de inicio'
   if isAuthenticated
@@ -9,13 +18,6 @@ block content
             figure
              img(src="./images/log1.jpg", alt="SIADCOM", title="SIADCOM")
                        
-      div(class="col-md-12 col-md-offset-0")
-       div(class="jumbotron") 
-            div(class="container")
-            h1 Sistema de Administración Condominal 
-            p Pago a Tiempo Servicion Completo
-            tempor 
-            p
-            p(class="btn btn-primary btn-lg" role="button")="Leer más"
+      
                   
                               
