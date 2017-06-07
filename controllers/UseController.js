@@ -174,6 +174,7 @@ module.exports = {
                  console.log(`${req.body.nombre}`);
                 console.log(JSON.stringify(documents));
                 //se cierra la conexion a la base de datos
+                console.log(documents.nombre);
                 documents.forEach(function(element) {
                     console.log(element.nombre);
                 });
