@@ -13,8 +13,9 @@ block content
             tbody(bgcolor="cyan" )
                 each item, i in items
                     tr
-                        
+                        td= item._id
                         td= item.nombre
+                        td= item.email
                         
             div(class="col-md-4 col-md-offset-4")
                 table(class="table table-striped"

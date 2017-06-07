@@ -156,8 +156,7 @@ module.exports = {
     },
     getUser : function(req, res, next){
         //pasamos la configuracion de la base de datos
-        //var _id = passport._id_
-       console.log(`este es el ide ${req.body._id}`)
+        var nombre =req.user.nombre;
         var config = require('.././database/config');
         //creamos la coneccion a la base de datos 
         var url = config.url;
@@ -165,19 +164,14 @@ module.exports = {
          mongo.connect(url, function (err, db) {
             if (err) throw err
             var collection = db.collection('Users')
-            collection.find({}).toArray(function (err, documents, fields) {
+            collection.find({
+                nombre : nombre
+            }).toArray(function (err, documents, fields) {
                  if (err) throw err;
                 //se imprimen los documentos encontrados 
                 console.log(`------- datos${documents}`);
-               
-                 console.log(`-------´´´´´´´´´´´´´´´´´´´´´´`);
-                 console.log(`${req.body.nombre}`);
                 console.log(JSON.stringify(documents));
                 //se cierra la conexion a la base de datos
-                console.log(documents.nombre);
-                documents.forEach(function(element) {
-                    console.log(element.nombre);
-                });
         
                 console.log ('lo que envia de items');
                //) console.log (`${items}`);
@@ -185,12 +179,9 @@ module.exports = {
                   res.render('users/myBalance',{
                        isAuthenticated : req.isAuthenticated(),
                         user : req.user, 
-                        items :[{
-                            nombre :`${documents}`
-                        }]
+                        items : documents
                     });
             });
         });
     }
-
 };
