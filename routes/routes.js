@@ -21,6 +21,8 @@ router.get('/users/item', AuthMiddleware.isLogged ,controllers.UseController. ge
 router.post('/users/item',AuthMiddleware.isLogged , controllers.UseController. postItem);
 router.get('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. getAdmUsers);
 router.get('/users/myBalance',AuthMiddleware.isLogged ,controllers.UseController. getUser);
+router.get('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. getPagos);
+router.post('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. postPagos);
 
 
 

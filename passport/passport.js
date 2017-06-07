@@ -27,6 +27,7 @@ module.exports = function (passport) {
             db.collection('Users').find({
                 email: email}).toArray(function (err, documents, fields) {
                  if (err) throw err;
+                 
                 //se imprimen los documentos encontrados 
                 console.log(documents)
                 //se cierra la conexion a la base de datos

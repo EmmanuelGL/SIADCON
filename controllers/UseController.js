@@ -149,7 +149,9 @@ module.exports = {
                   res.render('users/shUser',{
                        isAuthenticated : req.isAuthenticated(),
                         user : req.user, 
-                        items : documents
+                        items : documents,
+                        message: req.flash('infor'),
+                        messageRep: req.flash('messageRep')
                     });
             });
         });
@@ -183,5 +185,76 @@ module.exports = {
                     });
             });
         });
+    },
+    getPagos: function (req, res, next) {
+        res.render('users/upPago', {
+            isAuthenticated: req.isAuthenticated(),
+            user: req.user
+
+        });
+    },
+    postPagos: function (req, res, next) {
+        var _id= req.body.numDepto,
+        Seguridad= req.body.Seguridad,
+        RecoleccionBasura=req.body.RecoleccionBasura,
+        LimpiezaComunes=req.body.LimpiezaComunes,
+        AlumbradoComunes=req.body.AlumbradoComunes,
+        Limpiezatinacos=req.body.Limpiezatinacos,
+        PagoAdministrador=req.body.PagoAdministrador;
+        total=parseInt(req.body.PagoAdministrador)+parseInt(req.body.Limpiezatinacos)
+        +parseInt(req.body.AlumbradoComunes)+parseInt(req.body.LimpiezaComunes)
+        +parseInt(req.body.RecoleccionBasura)+parseInt(req.body.Seguridad);
+
+        console.log(total);
+        //pasamos la configuracion de la base de datos
+        var config = require('.././database/config');
+        //creamos la coneccion a la base de datos 
+        var url = config.url;
+        console.log(`> BD: ${url}`);
+        //insertamos los datos 
+        mongo.connect(url, function (err, db) {
+            if (err) return console.error(err)
+
+            var users = db.collection('Users')
+            // update
+           users.find({
+                _id:_id}).toArray(function (err, documents, fields) {
+                     if (err){
+                         console.log('---------------------------------')
+                         console.log('no existeeeeeeeeeeeeeeeeeeeeeee')
+                     }
+                     console.log('-----------losdoc')
+                     console.log(documents);
+
+                });
+            users.update({
+                _id: _id
+            }, {
+                    $set: {
+                       Seguridad,RecoleccionBasura,LimpiezaComunes,
+                       AlumbradoComunes,Limpiezatinacos,PagoAdministrador,total
+                        
+                    }
+                }, function (err, data, fields) {
+                var ninguno = "{\"n\":0,\"nModified\":0,\"ok\":1}"; 
+                    if(data==ninguno){
+                        console.log('no se realiso nada')
+                      
+                      return req.flash('messageRep','ERROR.');
+                       
+                    }
+                   
+                    if (err){
+                        return console.log("no esta el id");
+                        return done(null, false, req.flash('messageRep','ERROR.'));
+                    } 
+                   
+                })
+                 db.close()
+                   // console.log(documents+"<------------------------si imprime") ;
+        })
+    //  console.log(documents+"<------------------------si imprime") ;
+        req.flash('infor', 'Se ha realizo correctamente la actualizacion del Pago');
+        return res.redirect('/users/shUser');
     }
 };

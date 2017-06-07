@@ -2,44 +2,32 @@ extends ../templates/default
 include ../templates/nav
 block content
     div(class='row')
-        div(class='col-md-10 col-md-offset-1')
+        div(class="col-md-4 col-md-offset-0")
             h1(aling = "center")='Condominos Registrados'
-                table(class="table table-striped" )
+                
+                table(class="table table-striped")
                     thead(bgcolor="darkcyan")
                         tr
-                         th Mes 
-                          each item, i in items
-                               td(bgcolor="cyan")=item.mes
-                        tr
-                         th Seguridad 
-                          each item, i in items
-                               td(bgcolor="cyan")="$"+item.seguridad
-                        tr
-                            th Recoleccion Basura
-                            each item, i in items
-                                td(bgcolor="cyan")="$"+item.basura
-                        tr
-                            th Limpieza de Áreas Comunes
-                            each item, i in items
-                                td(bgcolor="cyan")="$"+item.limpieza
-                        tr
-                            th Alumbrado de Áreas Comunes
-                            each item, i in items
-                                td(bgcolor="cyan")="$"+item.luz
-                        tr
-                            th Limpieza tinacos
-                            each item, i in items
-                                td(bgcolor="cyan")="$"+item.tinacos
-                        tr
-                            th Pago Administrador
-                            each item, i in items
-                                td(bgcolor="cyan")="$"+item.pago
-                        tr
-                            th Total
-                            each item, i in items
-                                td(bgcolor="cyan")="$"+item.total
+                            td    Mes
+                            td Seguridad
+                            td Basura
+                            td Limpieza de Á.C.
+                            td Alumbrado de Á.C.
+                            td Limpieza tinacos
+                            td Pago Administrador
+                            td Total
+                    tbody(bgcolor="cyan" )
+                        each item, i in items
+                            td= item.mes
+                            td= '$'+item.seguridad
+                            td= '$'+item.basura
+                            td= '$'+item.limpieza
+                            td= '$'+item.luz
+                            td= '$'+item.tinacos
+                            td= '$'+item.pago
+                            td= '$'+item.total
+                             tr
+               
+           
                         
             button(type="button" onclick="location.href='/users/panel'" name="boton" class="btn btn-primary")="Regresar"
-
-
-
