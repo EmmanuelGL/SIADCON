@@ -35,7 +35,7 @@ module.exports = {
             collection.find({
                 _id: _id
             }).toArray(function (err, documents, fields) {
-                if (err)
+                if (err){}
                     collection.insert(user, function (err, data) {
                         if (err) console.log("se duplica el departamento")
                         console.log(JSON.stringify(user))
