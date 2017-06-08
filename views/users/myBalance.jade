@@ -30,11 +30,14 @@ block content
                         td= '$'+item.Limpiezatinacos
                         td= '$'+item.PagoAdministrador
                         td= '$'+item.total
-                        
-            div(class="col-md-4 col-md-offset-4")
-                table(class="table table-striped"
-                        aling = 'center')
-                    thead()
-                        tr
-                            th
-                                button(type="button" onclick="location.href='/users/panel'"  class="btn btn-primary")="Regresar"
+                            
+        div(class="col-md-3 col-md-offset-1")
+                    table(class="table table-striped"
+                            aling = 'center')
+                        thead()
+                            tr
+                                th
+                                    button(type="button" onclick="location.href='/users/panel'"  class="btn btn-primary")="Regresar"
+                                th
+                                    button(type="button" onclick="javascript:window.print()"  class="btn btn-primary")="Imprimir"
+                              

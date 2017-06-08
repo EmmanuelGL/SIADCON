@@ -23,6 +23,7 @@ router.get('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. g
 router.get('/users/myBalance',AuthMiddleware.isLogged ,controllers.UseController. getUser);
 router.get('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. getPagos);
 router.post('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. postPagos);
+router.get('/users/print',AuthMiddleware.isLogged ,controllers.UseController. getPrint);
 
 
 
