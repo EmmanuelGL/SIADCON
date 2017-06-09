@@ -1,36 +1,53 @@
 extends ../templates/default
 include ../templates/nav
 block content
-   div(class='row')
-        div(class='col-md-8 col-md-offset-2')
-            h1(aling = "center")='Balance General '
-            table(class="table table-striped")
-                    thead(bgcolor="darkcyan")
-                        tr
-                            td    Mes
-                            td Seguridad
-                            td Basura
-                            td Limpieza de Á.C.
-                            td Alumbrado de Á.C.
-                            td Limpieza tinacos
-                            td Pago Administrador
-                            td Total
-                    tbody(bgcolor="cyan" )
-                        each item, i in items
-                            td= item.mes
-                            td= '$'+item.seguridad
-                            td= '$'+item.basura
-                            td= '$'+item.limpieza
-                            td= '$'+item.luz
-                            td= '$'+item.tinacos
-                            td= '$'+item.pago
-                            td= '$'+item.total
-                             tr
-        div(class="col-md-3 col-md-offset-2")
-         table(class="table table-striped")
-            thead()
-             tr
-                th        
-                    button(type="button" onclick="location.href='/users/panel'" name="boton" class="btn btn-primary")="Regresar"
-                th
-                    button(type="button" onclick="javascript:window.print()"  class="btn btn-primary")="Imprimir"
+    div(class='row')
+        div(class='col-md-3 col-md-offset-4')
+            div(class='panel panel-default')
+                div(class='panel-heading')='Selecciona un Mes para mostrar'
+                    div(clas= 'panel-body')
+                        form(action='/users/balance' method='post' autocomplete='off')
+                            div(class='form-group')
+                            label(for="mes")='Mes'
+                            input(required type='month' name='mes' id='mes' placeholder='mes' class='form-control')
+                            button(type="submit" class="btn btn-primary")='Mostrar'
+   
+        div(class='row')
+            div(class='col-md-8 col-md-offset-2')
+                h1(aling = "center")='Balance General '
+                table(class="table table-striped")
+                        thead(bgcolor="darkcyan")
+                            tr
+                                td    Mes
+                                td Seguridad
+                                td Basura
+                                td Limpieza de Á.C.
+                                td Alumbrado de Á.C.
+                                td Limpieza tinacos
+                                td Pago Administrador
+                                td Total
+                        tbody(bgcolor="cyan" )
+                            each item, i in items
+                                tr
+                                    td= item.mes
+                                    td= '$'+item.seguridad
+                                    td= '$'+item.basura
+                                    td= '$'+item.limpieza
+                                    td= '$'+item.tinacos
+                                    td= '$'+item.pago
+                                    td= '$'+item.luz
+                                    td= '$'+item.total
+                                
+            div(class="col-md-3 col-md-offset-2")
+                table(class="table table-striped")
+                    thead()
+                    tr
+                        th        
+                            button(type="button" onclick="location.href='/users/panel'" name="boton" class="btn btn-primary")="Regresar"
+                        th
+                            button(type="button" onclick="javascript:window.print()"  class="btn btn-primary")="Imprimir"
+    
+
+
+               
+               

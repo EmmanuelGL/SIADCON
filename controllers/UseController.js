@@ -19,7 +19,9 @@ module.exports = {
             //seguridad (password: password) ---> no mandar el password
             //password: req.body.password
             password: password,
-            _id: req.body._id
+            _id: req.body._id,Seguridad:0, RecoleccionBasura:0, LimpiezaComunes:0,
+                            AlumbradoComunes:0, Limpiezatinacos:0, PagoAdministrador:0, total:0
+
         }
 
         //pasamos la configuracion de la base de datos
@@ -70,30 +72,70 @@ module.exports = {
 
         });
     },
-    getAdmLista: function (req, res, next) {
+    getAdmLista: function (req, res, next){
+         var mes = req.body.mes
         //pasamos la configuracion de la base de datos
         var config = require('.././database/config');
         //creamos la coneccion a la base de datos 
+        console.log("------------------mes---------------");
+        console.log(mes);
         var url = config.url;
         console.log(`> BD: ${url}`);
+
+
         mongo.connect(url, function (err, db) {
             if (err) throw err
-            var collection = db.collection('Pagos')
-            collection.find().toArray(function (err, documents, fields) {
+            var collection = db.collection('Users')
+            collection.distinct("pagos",function (err, documents, fields) {
+                if (err) throw err;
+                //se imprimen los documentos encontrados 
+                console.log(`------- datos${documents}`);
+                console.log(JSON.stringify(documents));
+                //se cierra la conexion a la base de datos
+                documents.forEach(function(element) {
+                    console.log(element);
+                
+                });
+
+                console.log('lo que envia de items en postAdmlista');
+                //) console.log (`${items}`);
+                db.close();
+                 res.render('users/balance', {
+                    isAuthenticated: req.isAuthenticated(),
+                    user: req.user,
+                    items:documents
+                });
+            });
+
+           
+        });
+         
+    },
+    postAdmLista: function (req, res, next) {
+        var mes = req.body.mes
+        //pasamos la configuracion de la base de datos
+        var config = require('.././database/config');
+        //creamos la coneccion a la base de datos 
+        console.log("------------------mes---------------");
+        console.log(mes);
+        var url = config.url;
+        console.log(`> BD: ${url}`);
+
+
+        mongo.connect(url, function (err, db) {
+            if (err) throw err
+            var collection = db.collection('Users')
+            collection.find({"pagos.mes":mes},{_id:false,"pagos.$":true}).toArray(function (err, documents, fields) {
                 if (err) throw err;
                 //se imprimen los documentos encontrados 
                 console.log(`------- datos${documents}`);
                 console.log(JSON.stringify(documents));
                 //se cierra la conexion a la base de datos
 
-                console.log('lo que envia de items');
+                console.log('lo que envia de items en postAdmlista');
                 //) console.log (`${items}`);
                 db.close();
-                res.render('users/balance', {
-                    isAuthenticated: req.isAuthenticated(),
-                    user: req.user,
-                    items: documents
-                });
+                return res.redirect('/users/balance');
             });
         });
 
@@ -107,19 +149,19 @@ module.exports = {
         });
     },
     postItem: function (req, res, next) {
-        var pago = {
-            seguridad: req.body.seguridad,
-            basura: req.body.basura,
-            limpieza: req.body.limpieza,
-            luz: req.body.luz,
-            tinacos: req.body.tinacos,
-            pago: req.body.pago,
-            mes: req.body.mes,
-            total: `${parseInt(req.body.pago) + parseInt(req.body.tinacos)
+        
+           var seguridad=parseInt(req.body.seguridad),
+            basura= parseInt(req.body.basura),
+            limpieza= parseInt(req.body.limpieza),
+            luz= parseInt(req.body.luz),
+            tinacos=parseInt(req.body.tinacos),
+            pago= parseInt(req.body.pago),
+            mes= (req.body.mes),
+            total=parseInt(req.body.pago) + parseInt(req.body.tinacos)
             + parseInt(req.body.luz) + parseInt(req.body.limpieza)
-            + parseInt(req.body.basura) + parseInt(req.body.seguridad)}`
+            + parseInt(req.body.basura) + parseInt(req.body.seguridad)
 
-        }
+        
         console.log(pago.total);
         console.log(pago);
         //pasamos la configuracion de la base de datos
@@ -130,10 +172,11 @@ module.exports = {
         //insertamos los datos 
         mongo.connect(url, function (err, db) {
             if (err) throw err
-            var collection = db.collection('Pagos')
-            collection.insert(pago, function (err, data) {
+            var collection = db.collection('Users')
+            collection.update({},{$push :{"pagos":{$each:[{seguridad
+                ,basura,limpieza,luz,tinacos,pago,mes,total}]}}},{multi:true}, function (err, data, pago) {
                 if (err) throw err
-                console.log(JSON.stringify(pago))
+                console.log(JSON.stringify(pago)) 
                 db.close()
             });
         });
@@ -141,35 +184,6 @@ module.exports = {
         req.flash('infor', 'Se ha registrado correctamente el nuevo pago');
 
         return res.redirect('/users/item');
-    },
-    getAdmUsers: function (req, res, next) {
-        //pasamos la configuracion de la base de datos
-        var config = require('.././database/config');
-        //creamos la coneccion a la base de datos 
-        var url = config.url;
-        console.log(`> BD: ${url}`);
-        mongo.connect(url, function (err, db) {
-            if (err) throw err
-            var collection = db.collection('Users')
-            collection.find().toArray(function (err, documents, fields) {
-                if (err) throw err;
-                //se imprimen los documentos encontrados 
-                console.log(`------- datos${documents}`);
-                console.log(JSON.stringify(documents));
-                //se cierra la conexion a la base de datos
-
-                console.log('lo que envia de items');
-                //) console.log (`${items}`);
-                db.close();
-                res.render('users/shUser', {
-                    isAuthenticated: req.isAuthenticated(),
-                    user: req.user,
-                    items: documents,
-                    message: req.flash('infor'),
-                    messageRep: req.flash('messageRep')
-                });
-            });
-        });
     },
     getUser: function (req, res, next) {
         //pasamos la configuracion de la base de datos
@@ -201,11 +215,33 @@ module.exports = {
             });
         });
     },
-    getPagos: function (req, res, next) {
-        res.render('users/upPago', {
-            isAuthenticated: req.isAuthenticated(),
-            user: req.user
+    getAdmUsers: function (req, res, next) {
+        //pasamos la configuracion de la base de datos
+        var config = require('.././database/config');
+        //creamos la coneccion a la base de datos 
+        var url = config.url;
+        console.log(`> BD: ${url}`);
+        mongo.connect(url, function (err, db) {
+            if (err) throw err
+            var collection = db.collection('Users')
+            collection.find().toArray(function (err, documents, fields) {
+                if (err) throw err;
+                //se imprimen los documentos encontrados 
+                console.log(`------- datos${documents}`);
+                console.log(JSON.stringify(documents));
+                //se cierra la conexion a la base de datos
 
+                console.log('lo que envia de items');
+                //) console.log (`${items}`);
+                db.close();
+                res.render('users/shUser', {
+                    isAuthenticated: req.isAuthenticated(),
+                    user: req.user,
+                    items: documents,
+                    message: req.flash('infor'),
+                    messageRep: req.flash('messageRep')
+                });
+            });
         });
     },
     postPagos: function (req, res, next) {
@@ -261,22 +297,5 @@ module.exports = {
 
         });
         //  console.log(documents+"<------------------------si imprime") ;  
-    },
-    getPrint: function(req, res , next){
-       
-       fs.createReadStream('./views/users/print.jade')
-  .pipe(jadepdf())
-  .pipe(fs.createWriteStream('./pdf/test.pdf'));
-  fs.createReadStream('views/form.jade').pipe(jadepdf()).pipe(fs.createWriteStream('form.pdf'));
-  
- 
-
-        res.render('users/print', {
-            isAuthenticated: req.isAuthenticated(),
-            user: req.user,
-
-        });
-        console.log(doc);
-        //console.log("------->"+doc.pipe(fs.createWriteStream('.././Documents')));
     }
 };

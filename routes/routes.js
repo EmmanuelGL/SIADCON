@@ -17,13 +17,13 @@ router.post('/auth/signin', passport.authenticate('local',{
 router.get('/auth/logout', controllers.UseController. logout);
 router.get('/users/panel', AuthMiddleware.isLogged , controllers.UseController. getUserPanel);
 router.get('/users/balance',AuthMiddleware.isLogged ,controllers.UseController. getAdmLista);
+router.post('/users/balance',AuthMiddleware.isLogged ,controllers.UseController. postAdmLista);
 router.get('/users/item', AuthMiddleware.isLogged ,controllers.UseController. getItem);
 router.post('/users/item',AuthMiddleware.isLogged , controllers.UseController. postItem);
-router.get('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. getAdmUsers);
 router.get('/users/myBalance',AuthMiddleware.isLogged ,controllers.UseController. getUser);
-router.get('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. getPagos);
+router.get('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. getAdmUsers);
 router.post('/users/shUser',AuthMiddleware.isLogged ,controllers.UseController. postPagos);
-router.get('/users/print',AuthMiddleware.isLogged ,controllers.UseController. getPrint);
+
 
 
 

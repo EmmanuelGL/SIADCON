@@ -40,35 +40,35 @@ block content
                     if messageRep.length > 0
                          div(class='alert alert-danger' role='alert')= messageRep
                     div(class='panel panel-default')
-                    div(class='panel-heading')='Actualizacion'
-                        div(clas= 'panel-body')
-                        form(action='/users/shUser' method='post' autocomplete='off')
-                            div(class='form-group')
-                                label(for="numDepto")='N° Depto'
-                                input(required type='number' name='numDepto' id='numDepto' placeholder='N° Depto' class='form-control')
-                            div(class='form-group')
-                                label(for="Seguridad")='Seguridad'
-                                input(required type='number' name='Seguridad' id='Seguridad' placeholder='Seguridad' class='form-control')
-                            div(class='form-group')
-                                label(for="Recolección de Basura")='Recolección de Basura'
-                                input(required type='number' name='RecoleccionBasura' id='RecoleccionBasura' placeholder='Recolección de Basura' class='form-control')
-                            div(class='form-group')
-                                label(for="LimpiezaComunes")='Limpieza de Areas Comunes'
-                                input(required type='number' name='LimpiezaComunes' id='LimpiezaComunes' placeholder='Limpieza de Areas Comunes' class='form-control')
-                            div(class='form-group')
-                                label(for="AlumbradoComunes")='Alumbrado de Areas Comunes'
-                                input(required type='number' name='AlumbradoComunes' id='AlumbradoComunes' placeholder='Alumbrado de Areas Comunes' class='form-control')
-                            div(class='form-group')
-                                label(for="Limpiezatinacos")='Limpieza de tinacos'
-                                input(required type='number' name='Limpiezatinacos' id='Limpiezatinacos' placeholder='Limpieza de tinacos' class='form-control')
-                            div(class='form-group')
-                                label(for="PagoAdministrador")='Pago Administrador'
-                                input(required type='number' name='PagoAdministrador' id='PagoAdministrador' placeholder='Pago Administrador' class='form-control')
-                            table(class="table table-striped")
-                                thead()
-                                    tr
-                                        th
-                                            button(type="submit" class="btn btn-primary")='Actualizar pagos'
-                                        th
-                                             button(type="button" onclick="location.href='/users/panel'" name="boton" class="btn btn-primary")="Regresar"
-           
+                        div(class='panel-heading')='Actualizacion'
+                            div(clas= 'panel-body')
+                            form(action='/users/shUser' method='post' autocomplete='off')
+                                div(class='form-group')
+                                    label(for="numDepto")='N° Depto'
+                                    input(required type='number' name='numDepto' id='numDepto' placeholder='N° Depto' class='form-control')
+                                div(class='form-group')
+                                    label(for="Seguridad")='Seguridad'
+                                    input(required type='number' name='Seguridad' id='Seguridad' placeholder='Seguridad' class='form-control')
+                                div(class='form-group')
+                                    label(for="Recolección de Basura")='Recolección de Basura'
+                                    input(required type='number' name='RecoleccionBasura' id='RecoleccionBasura' placeholder='Recolección de Basura' class='form-control')
+                                div(class='form-group')
+                                    label(for="LimpiezaComunes")='Limpieza de Areas Comunes'
+                                    input(required type='number' name='LimpiezaComunes' id='LimpiezaComunes' placeholder='Limpieza de Areas Comunes' class='form-control')
+                                div(class='form-group')
+                                    label(for="AlumbradoComunes")='Alumbrado de Areas Comunes'
+                                    input(required type='number' name='AlumbradoComunes' id='AlumbradoComunes' placeholder='Alumbrado de Areas Comunes' class='form-control')
+                                div(class='form-group')
+                                    label(for="Limpiezatinacos")='Limpieza de tinacos'
+                                    input(required type='number' name='Limpiezatinacos' id='Limpiezatinacos' placeholder='Limpieza de tinacos' class='form-control')
+                                div(class='form-group')
+                                    label(for="PagoAdministrador")='Pago Administrador'
+                                    input(required type='number' name='PagoAdministrador' id='PagoAdministrador' placeholder='Pago Administrador' class='form-control')
+                                table(class="table table-striped")
+                                    thead()
+                                        tr
+                                            th
+                                                button(type="submit" class="btn btn-primary")='Actualizar pagos'
+                                            th
+                                                button(type="button" onclick="location.href='/users/panel'" name="boton" class="btn btn-primary")="Regresar"
+            
