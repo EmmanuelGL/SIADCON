@@ -39,17 +39,17 @@ module.exports = {
             }).toArray(function (err, documents, fields) {
                 if (err){}
                     collection.insert(user, function (err, data) {
-                        if (err) console.log("se duplica el departamento")
+                        if (err) console.log("Se duplica el departamento")
                         console.log(JSON.stringify(user))
                         db.close()
                     })
                 console.log(documents + "<------------------------si imprime");
                 if (documents.length > 0) {
                     //
-                    req.flash('messageErr', 'ERROR. El departamento esta duplicado verifica');
+                    req.flash('messageErr', 'ERROR. El departamento está duplicado verifica');
                     console.log(documents + "<---------------------ya existe");
                 } else {
-                   req.flash('info', 'Se ha registrado correctamente, ya puede iniciar sesion ');
+                   req.flash('info', 'Se ha registrado correctamente, ya puede iniciar sesión ');
                     console.log(documents + "<------------------------es nuevo");
                 }
                 

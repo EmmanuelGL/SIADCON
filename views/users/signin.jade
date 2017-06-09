@@ -9,15 +9,15 @@ block content
        div(class='alert alert-danger' role='alert')= messageErr
 
       div(class='panel panel-default')
-        div(class='panel-heading')='Iniciar Sesion'
+        div(class='panel-heading')='Iniciar Sesión'
           div(clas= 'panel-body')
             form(action='/auth/signin' method='post' autocomplete='off')
               div(class='form-group')
-                label(for="email")='Email'
-                input(type='email' name='username' id='email' placeholder='Email' class='form-control')
+                label(for="email")='Em@il'
+                input(type='email' name='username' id='email' placeholder='Em@il' class='form-control')
               div(class='form-group')
                 label(for="password")='Password'
                 input(type='password' name='password' id='password' placeholder='Password' class='form-control')  
-              button(type="submit" class="btn btn-primary")='Iniciar Sesion'
+              button(type="submit" class="btn btn-primary")='Iniciar Sesión'
       if authmessage.length > 0
        div(class='alert alert-danger' role='alert')= authmessage
